@@ -10,8 +10,9 @@ import {ECDSA} from '@openzeppelin/contracts/utils/cryptography/ECDSA.sol';
 import {Strings} from '@openzeppelin/contracts/utils/Strings.sol';
 import {Address} from '@openzeppelin/contracts/utils/Address.sol';
 import {IChange} from './interface/IChange.sol';
+import {IPineapple} from './interface/IPineapple.sol';
 
-contract Pineapple is ERC721Enumerable, EIP712, Ownable {
+contract Pineapple is ERC721Enumerable, EIP712, Ownable, IPineapple {
     using ECDSA for bytes32;
     using Strings for uint256;
 
@@ -23,6 +24,8 @@ contract Pineapple is ERC721Enumerable, EIP712, Ownable {
 
     uint256 public total;
     address public change;
+
+    mapping(uint256 => uint256) public date;
 
     event Claim(uint256 tokenId, address from, uint256 fee);
 
@@ -38,6 +41,7 @@ contract Pineapple is ERC721Enumerable, EIP712, Ownable {
         require(tokenId > 0 && tokenId < 9001, "Token ID invalid");
         require(msg.value >= charges(), "Insufficient handling fee");
 
+        date[tokenId] = block.timestamp;
         _safeMint(_msgSender(), tokenId);
         Address.sendValue(payable(owner()), msg.value);
 
@@ -51,6 +55,7 @@ contract Pineapple is ERC721Enumerable, EIP712, Ownable {
             bytes32 digst = _hashTypedDataV4(keccak256(abi.encode(PERMIT_TYPEHASH, _msgSender(), tokenId)));
             require(digst.recover(_signature) == owner(), "Permit Failure");
         }
+        date[tokenId] = block.timestamp;
         _safeMint(_msgSender(), tokenId);
         Address.sendValue(payable(owner()), msg.value);
 
@@ -71,5 +76,9 @@ contract Pineapple is ERC721Enumerable, EIP712, Ownable {
     function getVIT(uint256 tokenId) external view returns (uint256) {
         if (change == address(0)) return 100;
         return IChange(change).getVIT(tokenId);
+    }
+
+    function getDate(uint256 tokenId) external view override returns (uint256) {
+        return date[tokenId];
     }
 }
