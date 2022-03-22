@@ -1,0 +1,16 @@
+node_modules
+build
+.DS_Store
+.idea
+contracts/**/*.json
+out
+artifacts
+cache
+yarn.lock
+target
+local
+yarn-error.log
+.env
+local
+coverage
+coverage.json
