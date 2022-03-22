@@ -30,5 +30,12 @@
   "dependencies": {
     "@salaku/hardhat": "^2.1.1",
     "@types/node": "^15.0.0"
+  },
+  "scripts": {
+    "compile": "hardhat compile",
+    "clean": "rimraf ./artifacts && rimraf ./cache",
+    "test": "hardhat test",
+    "deploy:Rinkeby": "hardhat run scripts/deploy.ts --network Rinkeby",
+    "test:coverage": "cross-env NODE_OPTIONS=\"--max-old-space-size=2048\" hardhat coverage"
   }
 }
