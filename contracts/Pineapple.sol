@@ -67,6 +67,7 @@ contract Pineapple is ERC721Enumerable, EIP712, Ownable, IPineapple {
     }
 
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
+        require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
         if (change == address(0)) {
             return string(abi.encodePacked(baseURI, tokenId.toString()));
         }
