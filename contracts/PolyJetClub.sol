@@ -10,9 +10,9 @@ import {ECDSA} from '@openzeppelin/contracts/utils/cryptography/ECDSA.sol';
 import {Strings} from '@openzeppelin/contracts/utils/Strings.sol';
 import {Address} from '@openzeppelin/contracts/utils/Address.sol';
 import {IChange} from './interface/IChange.sol';
-import {IPineapple} from './interface/IPineapple.sol';
+import {IPolyJetClub} from './interface/IPolyJetClub.sol';
 
-contract Pineapple is ERC721Enumerable, EIP712, Ownable, IPineapple {
+contract PolyJetClub is ERC721Enumerable, EIP712, Ownable, IPolyJetClub {
     using ECDSA for bytes32;
     using Strings for uint256;
 
@@ -32,7 +32,7 @@ contract Pineapple is ERC721Enumerable, EIP712, Ownable, IPineapple {
     event Claim(uint256 tokenId, address from, uint256 fee);
     event ClaimBatch(uint256[] tokenIds, address from, uint256 fee);
 
-    constructor() ERC721("Pineapple", "Pineapple") EIP712("Pineapple", "1") Ownable() {}
+    constructor() ERC721("PolyJetClub", "PolyJetClub") EIP712("PolyJetClub", "1") Ownable() {}
 
     function charges() internal returns (uint256) {
         total++;
