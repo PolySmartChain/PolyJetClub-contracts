@@ -18,8 +18,10 @@ contract Pineapple is ERC721Enumerable, EIP712, Ownable, IPineapple {
 
     // keccak256("Permit(address from,uint256 tokenId)");
     bytes32 public constant PERMIT_TYPEHASH = 0xc242e34b93f9ad1ffc2c2c079dea5dccebcd284285197f32e072ea272cc3eef1;
-    uint256 public constant Fee = 50000 ether;
-    uint256 public constant WhiteFee = 1 ether;
+    //    uint256 public constant Fee = 50000 ether;
+    uint256 public constant Fee = 0.001 ether;// test
+    //    uint256 public constant WhiteFee = 1 ether;
+    uint256 public constant WhiteFee = 0.001 ether;//test
     string public constant baseURI = "ipfs://";
 
     uint256 public total;
@@ -28,6 +30,7 @@ contract Pineapple is ERC721Enumerable, EIP712, Ownable, IPineapple {
     mapping(uint256 => uint256) public date;
 
     event Claim(uint256 tokenId, address from, uint256 fee);
+    event ClaimBatch(uint256[] tokenIds, address from, uint256 fee);
 
     constructor() ERC721("Pineapple", "Pineapple") EIP712("Pineapple", "1") Ownable() {}
 
@@ -46,6 +49,24 @@ contract Pineapple is ERC721Enumerable, EIP712, Ownable, IPineapple {
         Address.sendValue(payable(owner()), msg.value);
 
         emit Claim(tokenId, _msgSender(), msg.value);
+    }
+
+    function cliamBatch(uint256[] calldata tokenIds) external payable {
+        require(tokenIds.length > 0, "TokenIds invalid");
+        uint256 value1 = msg.value;
+        uint256 value2;
+        for (uint256 x = 0; x < tokenIds.length; x++) {
+            uint256 tokenId = tokenIds[x];
+            require(tokenId > 0 && tokenId < 9001, "Token ID invalid");
+
+            value2 += charges();
+            date[tokenId] = block.timestamp;
+            _safeMint(_msgSender(), tokenId);
+        }
+        require(value1 >= value2, "Insufficient handling fee");
+        Address.sendValue(payable(owner()), value1);
+
+        emit ClaimBatch(tokenIds, _msgSender(), msg.value);
     }
 
     function claimPermit(uint256 tokenId, bytes calldata _signature) external payable {
