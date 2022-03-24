@@ -1,4 +1,4 @@
-# Pineapple Contracts
+# Poly Jet Club Contracts
 
 ## install
 
