@@ -1,5 +1,5 @@
 import {ethers} from "hardhat"
-import {Contract} from 'ethers';
+import {Contract, utils} from 'ethers';
 import fs = require('fs')
 import path = require('path')
 
@@ -76,6 +76,8 @@ async function main() {
 						[0, "ipfs://xxx"]
 				]
 		])
+		await ret.MockChange.setERC20(ret.MockERC20.address, utils.parseEther('100'))
+		await ret.MockChange.setERC721(ret.MockERC721.address)
 
 		for (let k of Object.keys(ret)) {
 				let v: Contract | Data = (<any>ret)[k]
