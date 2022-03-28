@@ -48,12 +48,17 @@ async function deployContract(id: string, name: string, args: any[], libraries: 
 
 interface Data {
 		PolyJetClub: Contract
+
+		MockFee: Contract
 }
 
 async function main() {
 		let ret: Data = <any>{}
 
 		ret.PolyJetClub = await deployContract("PolyJetClub", "PolyJetClub", [])
+
+		//mock
+		ret.MockFee = await deployContract("MockFee", "MockFee", [])
 
 		for (let k of Object.keys(ret)) {
 				let v: Contract | Data = (<any>ret)[k]
