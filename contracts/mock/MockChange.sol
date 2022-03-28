@@ -14,7 +14,7 @@ contract MockChange is IChange, Ownable {
 
     uint256 public constant totalVIT = 100;
 
-    uint256 public interval = 12 hours;
+    uint256 public interval = 1 minutes;
     uint256 public beginTime;
     IPolyJetClub public pineapple;
 
@@ -47,7 +47,7 @@ contract MockChange is IChange, Ownable {
             Attribute memory attribute = _attributes[x];
             require(bytes(attribute.uri).length > 0, "Error uri");
             if (x != 0) require(attributes[x - 1].attr > attribute.attr, "Error attr");
-            attributes[x] = attribute;
+            attributes.push(attribute);
         }
     }
 

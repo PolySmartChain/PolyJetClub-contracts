@@ -49,7 +49,11 @@ async function deployContract(id: string, name: string, args: any[], libraries: 
 interface Data {
 		PolyJetClub: Contract
 
+		//mock
 		MockFee: Contract
+		MockChange: Contract
+		MockERC20: Contract
+		MockERC721: Contract
 }
 
 async function main() {
@@ -59,6 +63,19 @@ async function main() {
 
 		//mock
 		ret.MockFee = await deployContract("MockFee", "MockFee", [])
+		ret.MockERC20 = await deployContract("MockERC20", "MockERC20", []);
+		ret.MockERC721 = await deployContract("MockERC721", "MockERC721", []);
+		ret.MockChange = await deployContract("MockChange", "MockChange", [
+				ret.PolyJetClub.address,
+				[
+						[100, "ipfs://xxx"],
+						[80, "ipfs://xxx"],
+						[60, "ipfs://xxx"],
+						[40, "ipfs://xxx"],
+						[20, "ipfs://xxx"],
+						[0, "ipfs://xxx"]
+				]
+		])
 
 		for (let k of Object.keys(ret)) {
 				let v: Contract | Data = (<any>ret)[k]
