@@ -9,7 +9,7 @@ contract MockFee {
 
     function charges(uint256 tokenId) external pure returns (uint256) {
         if (tokenId <= 2e03) return Fee;
-        return Fee * 2 ** (tokenId / 2e03);
+        return Fee * 2 ** ((tokenId - 1) / 2e03);
     }
 
     function chargesWDC(uint256 tokenId) external pure returns (uint256) {
