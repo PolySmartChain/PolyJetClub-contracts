@@ -10,8 +10,8 @@ import {ECDSA} from '@openzeppelin/contracts/utils/cryptography/ECDSA.sol';
 import {Strings} from '@openzeppelin/contracts/utils/Strings.sol';
 import {Address} from '@openzeppelin/contracts/utils/Address.sol';
 import {IERC20} from '@openzeppelin/contracts/token/ERC20/IERC20.sol';
-import {IChange} from './interface/IChange.sol';
-import {IPolyJetClub} from './interface/IPolyJetClub.sol';
+import {IChange} from '../interface/IChange.sol';
+import {IPolyJetClub} from '../interface/IPolyJetClub.sol';
 
 contract PolyJetClub is ERC721Enumerable, EIP712, Ownable, IPolyJetClub {
     using ECDSA for bytes32;
