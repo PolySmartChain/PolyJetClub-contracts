@@ -46,13 +46,13 @@ contract PolyJetClub is ERC721Enumerable, EIP712, Ownable, IPolyJetClub {
 
     function claim(uint256 tokenId, uint256 amount) external payable {
         require(tokenId > 0 && tokenId < 9001, "Token ID invalid");
-        require(msg.value > 0 && amount > 0, "Abnormal fee");
         uint256 fee;
         if (amount == 0) {
             fee = msg.value;
             require(fee >= charges(Fee), "Insufficient handling fee");
             Address.sendValue(payable(Black), fee);
         } else {//wdc
+            require(msg.value == 0, "Abnormal fee");
             fee = amount;
             require(fee >= charges(WDCFee), "WDC insufficient handling fee");
             WDC.transferFrom(_msgSender(), Black, fee);
@@ -65,7 +65,6 @@ contract PolyJetClub is ERC721Enumerable, EIP712, Ownable, IPolyJetClub {
 
     function claimBatch(uint256[] calldata tokenIds, uint256 amount) external payable {
         require(tokenIds.length > 0 && tokenIds.length < 11, "Abnormal tokenIds length");
-        require(msg.value > 0 && amount > 0, "Abnormal fee");
         uint256 value1;
         uint256 value2;
         uint256 fee;
@@ -75,6 +74,7 @@ contract PolyJetClub is ERC721Enumerable, EIP712, Ownable, IPolyJetClub {
 
             Address.sendValue(payable(Black), value1);
         } else {//wdc
+            require(msg.value == 0, "Abnormal fee");
             value1 = amount;
             fee = WDCFee;
 
