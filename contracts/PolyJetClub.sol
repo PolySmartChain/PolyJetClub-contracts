@@ -40,12 +40,13 @@ contract PolyJetClub is ERC721Enumerable, EIP712, Ownable, IPolyJetClub {
 
     function charges(uint256 _fee) internal returns (uint256) {
         total++;
-        if (total <= 2e03) return _fee;
-        return _fee * 2 ** (total / 2e03);
+        if (total < 2001) return _fee;
+        return _fee * 2 ** ((total - 1) / 2e03);
     }
 
     function claim(uint256 tokenId, uint256 amount) external payable {
         require(tokenId > 0 && tokenId < 9001, "Token ID invalid");
+        require(msg.value > 0 && amount > 0, "Abnormal fee");
         uint256 fee;
         if (amount == 0) {
             fee = msg.value;
@@ -62,7 +63,9 @@ contract PolyJetClub is ERC721Enumerable, EIP712, Ownable, IPolyJetClub {
         emit Claim(tokenId, _msgSender(), fee);
     }
 
-    function cliamBatch(uint256[] calldata tokenIds, uint256 amount) external payable {
+    function claimBatch(uint256[] calldata tokenIds, uint256 amount) external payable {
+        require(tokenIds.length > 0 && tokenIds.length < 11, "Abnormal tokenIds length");
+        require(msg.value > 0 && amount > 0, "Abnormal fee");
         uint256 value1;
         uint256 value2;
         uint256 fee;
@@ -124,9 +127,10 @@ contract PolyJetClub is ERC721Enumerable, EIP712, Ownable, IPolyJetClub {
         return IChange(change).tokenURI(tokenId);
     }
 
-    function getVIT(uint256 tokenId) external view returns (uint256) {
+    function getVit(uint256 tokenId) external view returns (uint256) {
+        require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
         if (change == address(0)) return 100;
-        return IChange(change).getVIT(tokenId);
+        return IChange(change).getVit(tokenId);
     }
 
     function getDate(uint256 tokenId) external view override returns (uint256) {

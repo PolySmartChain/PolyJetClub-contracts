@@ -6,5 +6,5 @@ interface IChange {
 
     function tokenURI(uint256 tokenId) external view returns(string memory);
 
-    function getVIT(uint256 tokenId) external view returns (uint256);
+    function getVit(uint256 tokenId) external view returns (uint256);
 }

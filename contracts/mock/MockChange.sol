@@ -12,7 +12,7 @@ import {IChange} from '../interface/IChange.sol';
 contract MockChange is IChange, Ownable {
     using Strings for uint256;
 
-    uint256 public constant totalVIT = 100;
+    uint256 public constant totalVit = 100;
 
     uint256 public interval = 1 minutes;
     uint256 public beginTime;
@@ -51,7 +51,7 @@ contract MockChange is IChange, Ownable {
         }
     }
 
-    function _getLastVIT(TokenInfo memory tokenInfo, uint256 tokenId) internal view returns (uint256) {
+    function _getLastVit(TokenInfo memory tokenInfo, uint256 tokenId) internal view returns (uint256) {
         uint256 date = pineapple.getDate(tokenId);
         uint256 lastTimestamp;
         if (tokenInfo.lastTimestamp == 0) {//init
@@ -68,20 +68,20 @@ contract MockChange is IChange, Ownable {
         TokenInfo memory tokenInfo,
         uint256 tokenId
     ) internal view returns (uint256, string memory) {
-        uint256 lastVIT = _getLastVIT(tokenInfo, tokenId);
+        uint256 lastVit = _getLastVit(tokenInfo, tokenId);
         for (uint256 x = 0; x < attributes.length; x++) {
-            if (attributes[x].attr <= lastVIT) {
-                return (lastVIT, string(abi.encodePacked(attributes[x].uri, tokenId.toString())));
+            if (attributes[x].attr <= lastVit) {
+                return (lastVit, string(abi.encodePacked(attributes[x].uri, tokenId.toString())));
             }
         }
         return (0, "");
     }
 
     //erc20
-    function addVIT(uint256 tokenId, uint256 amount) external {
+    function addVit(uint256 tokenId, uint256 amount) external {
         require(amount >= per, "Error amount");
         TokenInfo storage tokenInfo = tokenInfos[tokenId];
-        uint256 vit = _getLastVIT(tokenInfo, tokenId);
+        uint256 vit = _getLastVit(tokenInfo, tokenId);
         require(vit > 0, "Error VIT");
         uint256 out = amount % per;
         if (out != 0) {
@@ -97,11 +97,11 @@ contract MockChange is IChange, Ownable {
     //erc721
     function resurgence(uint256 tokenId, uint256 tokenId_721) external {
         TokenInfo storage tokenInfo = tokenInfos[tokenId];
-        uint256 vit = _getLastVIT(tokenInfo, tokenId);
+        uint256 vit = _getLastVit(tokenInfo, tokenId);
         require(vit == 0, "Error VIT");
 
         erc721.transferFrom(msg.sender, owner(), tokenId_721);
-        tokenInfo.vit = totalVIT;
+        tokenInfo.vit = totalVit;
         tokenInfo.lastTimestamp = block.timestamp;
     }
 
@@ -132,11 +132,11 @@ contract MockChange is IChange, Ownable {
         (, uri) = getAttributes(tokenInfo, tokenId);
     }
 
-    function getVIT
+    function getVit
     (
         uint256 tokenId
     ) external view override returns (uint256 vit) {
         TokenInfo memory tokenInfo = tokenInfos[tokenId];
-        vit = _getLastVIT(tokenInfo, tokenId);
+        vit = _getLastVit(tokenInfo, tokenId);
     }
 }
