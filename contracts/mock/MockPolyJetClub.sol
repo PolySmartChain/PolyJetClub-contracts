@@ -19,9 +19,9 @@ contract PolyJetClub is ERC721Enumerable, EIP712, Ownable, IPolyJetClub {
 
     // keccak256("Permit(address from,uint256 tokenId)");
     bytes32 public constant PERMIT_TYPEHASH = 0xc242e34b93f9ad1ffc2c2c079dea5dccebcd284285197f32e072ea272cc3eef1;
-    uint256 public constant Fee = 0.001 ether;
+    uint256 public constant Fee = 5 ether;
     uint256 public constant WDCFee = 12e11;
-    uint256 public constant WhiteFee = 0.001 ether;
+    uint256 public constant WhiteFee = 1.2 ether;
     uint256 public constant WDCWhiteFee = 100000000;
     address public constant Black = 0x8888888888888888888888888888888888888888;
     string public constant baseURI = "ipfs://QmSpBhCjD3EY82nxRaruMUBkGoSEihUA79WwdtDFipeSJJ";
