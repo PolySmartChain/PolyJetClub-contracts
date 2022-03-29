@@ -1,15 +1,15 @@
 // @ts-ignore
 import {waffle} from 'hardhat'
 import {expect} from 'chai'
-import MockPolyJetClub from '../../artifacts/contracts/mock/MockPolyJetClub.sol/MockPolyJetClub.json'
-import MockWDC from '../../artifacts/contracts/mock/MockWDC.sol/MockWDC.json'
+import MockPolyJetClub from '../artifacts/contracts/mock/MockPolyJetClub.sol/MockPolyJetClub.json'
+import MockWDC from '../artifacts/contracts/mock/MockWDC.sol/MockWDC.json'
 import {BigNumber, Contract, utils} from 'ethers'
-import {getSigMessage} from "../utils";
+import {getSigMessage} from "./utils";
 
 const {deployContract} = waffle
 var black = '0x8888888888888888888888888888888888888888'
 
-describe('MockPolyJetClub', async () => {
+describe('PolyJetClub', async () => {
 		const [alice, bob, dave] = waffle.provider.getWallets()
 
 		let mockPolyJetClub: Contract
