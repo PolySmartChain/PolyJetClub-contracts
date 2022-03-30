@@ -24,9 +24,9 @@ contract PolyJetClub is ERC721Enumerable, EIP712, Ownable, IPolyJetClub {
     uint256 public constant WhiteFee = 1 ether;
     uint256 public constant WDCWhiteFee = 100000000;
     address public constant Black = 0x8888888888888888888888888888888888888888;
-    string public constant baseURI = "ipfs://QmSpBhCjD3EY82nxRaruMUBkGoSEihUA79WwdtDFipeSJJ";
 
     IERC20 public constant WDC = IERC20(0x101D4507E0c07Aa929EF4Fd1eabcB7bcAef5e391);
+    string public baseURI = "ipfs://QmdtL74LwH5U8JY2ce1euX9ZTbJd1xrH7yJFep3B4JgVAs/";
 
     uint256 public total;
     address public change;
@@ -117,6 +117,10 @@ contract PolyJetClub is ERC721Enumerable, EIP712, Ownable, IPolyJetClub {
 
     function setChange(address _change) external onlyOwner {
         change = _change;
+    }
+
+    function setURI(string calldata _uri) external onlyOwner {
+        baseURI = _uri;
     }
 
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
