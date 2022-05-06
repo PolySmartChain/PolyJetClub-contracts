@@ -5,7 +5,7 @@ import "solidity-coverage"
 export default {
   solidity: {
     version: '0.8.12',
-    settRings: {
+    setttings: {
       optimizer: { enabled: true, runs: 200 },
       evmVersion: 'istanbul',
     },
