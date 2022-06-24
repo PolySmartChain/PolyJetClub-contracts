@@ -63,21 +63,21 @@ async function main() {
 
 		//mock
 		ret.MockFee = await deployContract("MockFee", "MockFee", [])
-		ret.MockERC20 = await deployContract("MockERC20", "MockERC20", []);
-		ret.MockERC721 = await deployContract("MockERC721", "MockERC721", []);
-		ret.MockChange = await deployContract("MockChange", "MockChange", [
-				ret.PolyJetClub.address,
-				[
-						[100, "ipfs://xxx"],
-						[80, "ipfs://xxx"],
-						[60, "ipfs://xxx"],
-						[40, "ipfs://xxx"],
-						[20, "ipfs://xxx"],
-						[0, "ipfs://xxx"]
-				]
-		])
-		await ret.MockChange.setERC20(ret.MockERC20.address, utils.parseEther('100'))
-		await ret.MockChange.setERC721(ret.MockERC721.address)
+		// ret.MockERC20 = await deployContract("MockERC20", "MockERC20", []);
+		// ret.MockERC721 = await deployContract("MockERC721", "MockERC721", []);
+		// ret.MockChange = await deployContract("MockChange", "MockChange", [
+		// 		ret.PolyJetClub.address,
+		// 		[
+		// 				[100, "ipfs://xxx"],
+		// 				[80, "ipfs://xxx"],
+		// 				[60, "ipfs://xxx"],
+		// 				[40, "ipfs://xxx"],
+		// 				[20, "ipfs://xxx"],
+		// 				[0, "ipfs://xxx"]
+		// 		]
+		// ])
+		// await ret.MockChange.setERC20(ret.MockERC20.address, utils.parseEther('100'))
+		// await ret.MockChange.setERC721(ret.MockERC721.address)
 
 		for (let k of Object.keys(ret)) {
 				let v: Contract | Data = (<any>ret)[k]
