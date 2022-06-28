@@ -97,7 +97,7 @@ contract PolyJetClubV2 is ERC721Enumerable, EIP712, Ownable, IPolyJetClub {
         require(tokenId > 9000 && tokenId < 10001, "Token ID invalid");
         require(Proxys.hasMint(_asSingletonArray(tokenId)), "Token already minted");
         uint256 fee;
-        if (msg.value != 0) {
+        if (msg.value > 0) {
             fee = msg.value;
             require(fee >= WhiteFee, "Insufficient handling fee");
 
