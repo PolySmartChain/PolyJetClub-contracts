@@ -29,7 +29,9 @@
   },
   "dependencies": {
     "@salaku/hardhat": "^2.1.1",
-    "@types/node": "^15.0.0"
+    "@types/node": "^15.0.0",
+    "@uniswap/v2-core": "1.0.0",
+    "@uniswap/v2-periphery": "^1.1.0-beta.0"
   },
   "scripts": {
     "compile": "hardhat compile",
