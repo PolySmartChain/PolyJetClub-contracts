@@ -132,6 +132,10 @@ contract PolyJetClubV2 is ERC721Enumerable, EIP712, Ownable, IPolyJetClub {
         Fee = _fee;
     }
 
+    function setProxys(address _proxys) external onlyOwner {
+        Proxys = IProxys(_proxys);
+    }
+
     function setChange(address _change) external onlyOwner {
         change = _change;
     }
