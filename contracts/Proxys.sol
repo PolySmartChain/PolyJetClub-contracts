@@ -2,7 +2,6 @@
 
 pragma solidity ^0.8.0;
 
-//import {IERC721Enumerable} from '@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol';
 import {Ownable} from '@openzeppelin/contracts/access/Ownable.sol';
 import {IERC20} from '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 import {IProxys} from './interface/IProxys.sol';
@@ -11,8 +10,7 @@ import {ISwapRouter} from './interface/ISwapRouter.sol';
 
 contract Proxys is Ownable, IProxys {
 
-    bytes4 public constant OwnerOf = bytes4(keccak256(bytes('ownerOf(uint256)')));
-    address public Black = 0x8888888888888888888888888888888888888888;
+    address private Black = 0x8888888888888888888888888888888888888888;
     IERC20 public WDC;
     address public WPSC;
     ISwapRouter public swapRouter;
