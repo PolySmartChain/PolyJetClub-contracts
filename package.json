@@ -38,6 +38,7 @@
     "clean": "rimraf ./artifacts && rimraf ./cache",
     "test": "hardhat test",
     "deploy:Rinkeby": "hardhat run scripts/deploy.ts --network Rinkeby",
+    "deploy2:Rinkeby": "hardhat run scripts/deploy2.ts --network Rinkeby",
     "test:coverage": "cross-env NODE_OPTIONS=\"--max-old-space-size=2048\" hardhat coverage"
   }
 }
