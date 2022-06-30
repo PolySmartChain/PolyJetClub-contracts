@@ -35,7 +35,7 @@ describe("PolyJetClubV2", async () => {
 				uniswapV2Factory = await deployContract(alice, UniswapV2Factory, [constants.AddressZero])
 				uniswapV2Router02 = await deployContract(alice, UniswapV2Router02, [uniswapV2Factory.address, WPSC.address])
 				proxys = await deployContract(alice, Proxys, [polyJetClub.address, WDC.address, WPSC.address, uniswapV2Router02.address])
-				polyJetClubV2 = await deployContract(alice, PolyJetClubV2, [proxys.address])
+				polyJetClubV2 = await deployContract(alice, PolyJetClubV2, [proxys.address, 0])
 				await polyJetClub.connect(alice).setWDC(WDC.address)
 				await proxys.connect(alice).setConfig(4, polyJetClubV2.address)
 

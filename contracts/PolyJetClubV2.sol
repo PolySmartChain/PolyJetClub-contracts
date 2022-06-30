@@ -33,9 +33,11 @@ contract PolyJetClubV2 is ERC721Enumerable, EIP712, Ownable, IPolyJetClub {
 
     event Claim(uint256 tokenId, address from, uint256 fee);
     event ClaimBatch(uint256[] tokenIds, address from, uint256 fee);
+    event Migration(address from, uint256[] tokenIds);
 
-    constructor(address _proxys) ERC721("PolyJetClub", "PolyJetClub") EIP712("PolyJetClub", "1") Ownable() {
+    constructor(address _proxys, uint256 _total) ERC721("PolyJetClub", "PolyJetClub") EIP712("PolyJetClub", "1") Ownable() {
         Proxys = IProxys(_proxys);
+        total = _total;
     }
 
     function _asSingletonArray(uint256 element) private pure returns (uint256[] memory) {
@@ -126,6 +128,8 @@ contract PolyJetClubV2 is ERC721Enumerable, EIP712, Ownable, IPolyJetClub {
 
             Proxys.transferFrom(msg.sender, tokenId);
         }
+
+        emit Migration(msg.sender, tokenIds);
     }
 
     function setFee(uint256 _fee) external onlyOwner {
