@@ -10,7 +10,7 @@ contract transferBath {
 
     function tranbath(uint256 amount, address to) external {
         uint256 length = polyjetclub.balanceOf(msg.sender);
-        require(length == 0 && length >= amount, "Error");
+        require(length > 0 && length >= amount, "Error");
         for (uint256 x = 0; x < amount; x++) {
             uint256 tokenId = polyjetclub.tokenOfOwnerByIndex(msg.sender, x);
             polyjetclub.transferFrom(msg.sender, to, tokenId);
