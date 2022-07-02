@@ -2,9 +2,9 @@
 
 pragma solidity ^0.8.0;
 
-import {IPolyJetClub} from './interface/IPolyJetClub.sol';
+import {IPolyJetClub} from '../interface/IPolyJetClub.sol';
 
-contract transferBath {
+contract MockTransferBath {
 
     IPolyJetClub public polyjetclub = IPolyJetClub(0xC04cb528Ef1c182d053e84bf1705C9E2b2a3deAf);
 
