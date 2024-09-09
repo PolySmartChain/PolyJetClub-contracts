@@ -13,7 +13,7 @@ import {IChange} from '../interface/IChange.sol';
 import {IPolyJetClub} from '../interface/IPolyJetClub.sol';
 import {IProxys} from '../interface/IProxys.sol';
 
-contract PolyJetClubV2 is ERC721Enumerable, EIP712, Ownable, IPolyJetClub {
+contract PolyJetClubV3 is ERC721Enumerable, EIP712, Ownable, IPolyJetClub {
     using ECDSA for bytes32;
     using Strings for uint256;
 
